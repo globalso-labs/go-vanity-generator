@@ -80,7 +80,7 @@ func (g *DefaultGenerator) Generate(ctx context.Context, vanity config.Vanity) e
 		return err
 	}
 
-	if err := g.writePackagePages(ctx, vanity.Packages); err != nil {
+	if err := g.writePackagePages(ctx, vanity.Domain, vanity.Packages); err != nil {
 		logger.Ctx(ctx).Error().Err(err).Msg("Failed to generate the package pages.")
 		return err
 	}

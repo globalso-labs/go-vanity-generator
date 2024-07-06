@@ -31,8 +31,8 @@ type PackageAttributes struct {
 	Package  config.Package
 }
 
-func NewPackageAttributes(ctx context.Context, pkg config.Package) *PackageAttributes {
-	provider, err := providers.New(pkg.Provider, pkg)
+func NewPackageAttributes(ctx context.Context, domain string, pkg config.Package) *PackageAttributes {
+	provider, err := providers.New(domain, pkg)
 	if err != nil {
 		logger.Ctx(ctx).Error().Err(err).Str("package", pkg.Name).Msg("Failed to create the provider")
 		return nil

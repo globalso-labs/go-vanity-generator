@@ -30,7 +30,7 @@ import (
 	"go.globalso.dev/x/tools/vanity/internal/data"
 )
 
-func (g *DefaultGenerator) writePackagePages(ctx context.Context, packages []config.Package) error {
+func (g *DefaultGenerator) writePackagePages(ctx context.Context, domain string, packages []config.Package) error {
 	tmpl, err := template.ParseFS(data.Templates, path.Join(data.TemplatesPath, data.PackagePage))
 	if err != nil {
 		logger.Ctx(ctx).Error().Err(err).Interface("templates", data.Templates).Msg("Failed to parse the package page template.")
@@ -39,7 +39,7 @@ func (g *DefaultGenerator) writePackagePages(ctx context.Context, packages []con
 
 	logger.Ctx(ctx).Debug().Str("path", g.output).Msg("Writing the package pages.")
 	for _, p := range packages {
-		if err = g.writePackagePage(ctx, tmpl, p); err != nil {
+		if err = g.writePackagePage(ctx, tmpl, domain, p); err != nil {
 			logger.Ctx(ctx).Error().Err(err).Str("package", p.Name).Msg("Failed to write the package page.")
 			return err
 		}
@@ -48,7 +48,7 @@ func (g *DefaultGenerator) writePackagePages(ctx context.Context, packages []con
 	return nil
 }
 
-func (g *DefaultGenerator) writePackagePage(ctx context.Context, tmpl *template.Template, pkg config.Package) error {
+func (g *DefaultGenerator) writePackagePage(ctx context.Context, tmpl *template.Template, domain string, pkg config.Package) error {
 	ctx = logger.Ctx(ctx).With().Str("package", pkg.Name).Logger().WithContext(ctx)
 
 	var packagePath = filepath.Join(g.output, pkg.Name, "index.html")
@@ -67,17 +67,17 @@ func (g *DefaultGenerator) writePackagePage(ctx context.Context, tmpl *template.
 	}
 	defer file.Close()
 
-	attributes := NewPackageAttributes(ctx, pkg)
+	attributes := NewPackageAttributes(ctx, domain, pkg)
 	if err = tmpl.Execute(file, attributes); err != nil {
 		logger.Ctx(ctx).Error().Err(err).Msg("Failed to write the package page")
 		return err
 	}
 
 	logger.Ctx(ctx).Info().Msg("Package page written successfully")
-	return g.writeSubPackages(ctx, tmpl, pkg)
+	return g.writeSubPackages(ctx, tmpl, domain, pkg)
 }
 
-func (g *DefaultGenerator) writeSubPackages(ctx context.Context, tmpl *template.Template, pkg config.Package) error {
+func (g *DefaultGenerator) writeSubPackages(ctx context.Context, tmpl *template.Template, domain string, pkg config.Package) error {
 	if len(pkg.Subpackages) == 0 {
 		return nil
 	}
@@ -90,7 +90,7 @@ func (g *DefaultGenerator) writeSubPackages(ctx context.Context, tmpl *template.
 		pkg.Subpackages = nil
 
 		logger.Ctx(ctx).Trace().Msg("Writing the subpackage page")
-		if err := g.writePackagePage(ctx, tmpl, pkg); err != nil {
+		if err := g.writePackagePage(ctx, tmpl, domain, pkg); err != nil {
 			logger.Ctx(ctx).Error().Err(err).Msg("Failed to write the subpackage page")
 			return err
 		}
