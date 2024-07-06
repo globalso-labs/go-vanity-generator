@@ -1,9 +1,9 @@
 /*
- * go-template
- * codes.go
- * This file is part of go-template.
- * Copyright (c) 2023.
- * Last modified at Sun, 24 Dec 2023 20:43:07 -0500 by nick.
+ * go-vanity-generator
+ * path.go
+ * This file is part of go-vanity-generator.
+ * Copyright (c) 2024.
+ * Last modified at Fri, 5 Jul 2024 19:34:33 -0500 by nick.
  *
  * DISCLAIMER: This software is provided "as is" without warranty of any kind, either expressed or implied. The entire
  * risk as to the quality and performance of the software is with you. In no event will the author be liable for any
@@ -16,16 +16,11 @@
  * or otherwise exploit this software.
  */
 
-package errors
-
-import "strconv"
-
-type CodeStatus uint32
+package internal
 
 const (
-	_ CodeStatus = iota + 1000
-)
+	// ConfigPath is the path to the configuration file.
+	ConfigPath = "vanity.yaml"
 
-func (c CodeStatus) String() string {
-	return strconv.Itoa(int(c))
-}
+	GenPath = "vanity.yaml"
+)

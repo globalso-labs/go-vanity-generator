@@ -1,9 +1,9 @@
 /*
- * go-template
- * process.go
- * This file is part of go-template.
+ * go-vanity-generator
+ * github.go
+ * This file is part of go-vanity-generator.
  * Copyright (c) 2024.
- * Last modified at Thu, 14 Mar 2024 16:38:38 -0500 by nick.
+ * Last modified at Mon, 24 Jul 2023 15:07:16 -0500 by nick.
  *
  * DISCLAIMER: This software is provided "as is" without warranty of any kind, either expressed or implied. The entire
  * risk as to the quality and performance of the software is with you. In no event will the author be liable for any
@@ -16,10 +16,38 @@
  * or otherwise exploit this software.
  */
 
-package domain
+package providers
 
-type ProcessID string
+import (
+	"fmt"
 
-func (d ProcessID) String() string {
-	return string(d)
+	"go.globalso.dev/x/tools/vanity/config"
+)
+
+type githubProvider struct {
+	baseProvider
+}
+
+// GetGoSourceTag implements Provider.
+func (p *githubProvider) GetGoSourceTag() string {
+	return fmt.Sprintf(
+		"%s/%s %s %s/tree/%s{/dir} %s/blob/%s{/dir}/{file}#L{line}",
+		p.domain, p.name,
+		p.repo,
+		p.repo, p.branch,
+		p.repo, p.branch,
+	)
+}
+
+var _ Provider = &githubProvider{}
+
+func newGithubProvider(domain string, pkg config.Package) Provider {
+	return &githubProvider{
+		baseProvider: baseProvider{
+			domain: domain,
+			name:   pkg.Name,
+			repo:   pkg.URL,
+			branch: pkg.Branch,
+		},
+	}
 }

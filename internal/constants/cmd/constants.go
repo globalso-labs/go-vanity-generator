@@ -1,13 +1,13 @@
 /*
- * go-template
- * codes.go
- * This file is part of go-template.
- * Copyright (c) 2023.
- * Last modified at Sun, 24 Dec 2023 20:43:07 -0500 by nick.
+ * go-vanity-generator
+ * constants.go
+ * This file is part of go-vanity-generator.
+ * Copyright (c) 2024.
+ * Last modified at Fri, 5 Jul 2024 20:30:43 -0500 by nick.
  *
  * DISCLAIMER: This software is provided "as is" without warranty of any kind, either expressed or implied. The entire
  * risk as to the quality and performance of the software is with you. In no event will the author be liable for any
- * damages, including any constants, special, incidental, or consequential damages arising out of the use or inability
+ * damages, including any general, special, incidental, or consequential damages arising out of the use or inability
  * to use the software (that includes, but not limited to, loss of data, data being rendered inaccurate, or losses
  * sustained by you or third parties, or a failure of the software to operate with any other programs), even if the
  * author has been advised of the possibility of such damages.
@@ -16,16 +16,17 @@
  * or otherwise exploit this software.
  */
 
-package errors
-
-import "strconv"
-
-type CodeStatus uint32
+package cmd
 
 const (
-	_ CodeStatus = iota + 1000
+	// Force determines whether we overwrite the configuration file.
+	Force = "force"
 )
 
-func (c CodeStatus) String() string {
-	return strconv.Itoa(int(c))
-}
+const (
+	// GeneratorClean determines whether we clean the output directory before generation
+	GeneratorClean = "clean"
+
+	// GeneratorOutput determines the output directory for the generated files.
+	GeneratorOutput = "output"
+)

@@ -1,9 +1,9 @@
 /*
- * credentials
- * main.go
- * This file is part of credentials.
+ * go-vanity-generator
+ * struct.go
+ * This file is part of go-vanity-generator.
  * Copyright (c) 2024.
- * Last modified at Tue, 2 Jul 2024 21:49:26 -0500 by nick.
+ * Last modified at Mon, 24 Jul 2023 15:07:16 -0500 by nick.
  *
  * DISCLAIMER: This software is provided "as is" without warranty of any kind, either expressed or implied. The entire
  * risk as to the quality and performance of the software is with you. In no event will the author be liable for any
@@ -16,21 +16,15 @@
  * or otherwise exploit this software.
  */
 
-package initialize
+package providers
 
 import (
-	"context"
-	"runtime"
-
-	"github.com/gsols/go-logger"
-	"github.com/nickaguilarh/credentials/internal"
+	"go.globalso.dev/x/tools/vanity/config"
 )
 
-// Execute runs the application and handles the shutdown signal.
-func Execute(ctx context.Context) error {
-	logger.Ctx(ctx).Info().Msgf("Running version %s on %s/%s with %d CPUs and %d GOMAXPROCS.",
-		internal.Version, runtime.GOOS, runtime.GOARCH, runtime.NumCPU(), runtime.GOMAXPROCS(0),
-	)
-
-	return nil
+type Provider interface {
+	GetGoImportTag() string
+	GetGoSourceTag() string
 }
+
+type providerGenerator func(domain string, pkg config.Package) Provider

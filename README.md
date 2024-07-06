@@ -1,36 +1,59 @@
-# Awesome Project
+# Go Vanity Import Path Generator
 
-The awesome project provides awesome features to awesome people.
+This project simplifies the creation of vanity import paths for Go packages 
+using a YAML configuration file. It allows developers to define custom import
+paths for their Go packages, making them more accessible and easier to use in
+Go projects.
 
-The project uses `make` to make your life easier. If you're not familiar with Makefiles you can take a look at [this quickstart guide](https://makefiletutorial.com).
+## Features
 
-Whenever you need help regarding the available actions, just use the following command.
+- **Easy Configuration**: Define your vanity import paths in a simple YAML file.
+- **Automatic Updates**: Automatically updates your Go project with the specified
+vanity import paths.
+- **Customizable**: Flexible configuration options to meet your project's needs.
 
-```bash
-make help
-```
+## Getting Started
 
-## Setup
+### Prerequisites
 
-To get your setup up and running the only thing you have to do is
+- Go 1.15 or later
+- Git
 
-```bash
-make all
-```
+### Installation
 
-This will initialize a git repo, download the dependencies in the latest versions and install all needed tools.
-If needed code generation will be triggered in this target as well.
+Download the latest release from the 
+[releases page](https://github.com/globalso-labs/go-vanity-generator/releases) 
+and extract the binary to your desired location.
 
-## Test & lint
+### Configuration
+Create a go-vanity.yml file in the root directory of your project with the
+following structure:
 
-Run linting
+```yaml 
+# yaml-language-server: $schema=https://raw.githubusercontent.com/globalso-labs/go-vanity/main/config.schema.json
+domain: "go.globalso.dev"
+author: "Global Solutions L.A."
+packages:
+	- name: x/logger
+	  provider: github
+	  url: "https://github.com/globalso-labs/go-logger"
+	  branch: main
+	  subpackages:
+		  - logger
+		  - v2
+		  - v3
+	- name: tools
+	  provider: gitlab
+	  url: "https://gitlab.com/someuser/sometools"
+	  branch: devel
+	- name: awesome
+	  provider: gitea
+	  url: "https://try.gitea.io/someuser/some-awesome-package"
+	  branch: staging
+	  website: "https://somesite.com/my-awesome-package"
+	- name: others
+	  provider: sourcehut
+	  url: "https://git.sr.ht/~someuser/someotherpackage"
+	  branch: master
 
-```bash
-make lint
-```
-
-Run tests
-
-```bash
-make test
 ```

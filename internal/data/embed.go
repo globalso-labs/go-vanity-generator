@@ -1,9 +1,9 @@
 /*
- * go-template
- * codes.go
- * This file is part of go-template.
- * Copyright (c) 2023.
- * Last modified at Sun, 24 Dec 2023 20:43:07 -0500 by nick.
+ * go-vanity-generator
+ * embed.go
+ * This file is part of go-vanity-generator.
+ * Copyright (c) 2024.
+ * Last modified at Fri, 5 Jul 2024 19:28:06 -0500 by nick.
  *
  * DISCLAIMER: This software is provided "as is" without warranty of any kind, either expressed or implied. The entire
  * risk as to the quality and performance of the software is with you. In no event will the author be liable for any
@@ -16,16 +16,27 @@
  * or otherwise exploit this software.
  */
 
-package errors
+package data
 
-import "strconv"
-
-type CodeStatus uint32
+import "embed"
 
 const (
-	_ CodeStatus = iota + 1000
+	// ExampleFilePath is the path to the example file.
+	ExampleFilePath = "x/vanity.yaml"
+
+	// TemplatesPath is the path to the template's directory.
+	TemplatesPath = "templates"
+
+	// ErrorPage is the error page template.
+	ErrorPage = "error.tmpl"
+	// IndexPage is the index page template.
+	IndexPage = "index.tmpl"
+	// PackagePage is the module page template.
+	PackagePage = "package.tmpl"
 )
 
-func (c CodeStatus) String() string {
-	return strconv.Itoa(int(c))
-}
+//go:embed x/vanity.yaml
+var ExampleFile embed.FS
+
+//go:embed templates/*
+var Templates embed.FS

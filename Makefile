@@ -22,20 +22,23 @@ imports: bin/goimports
 	@bin/goimports -w -l .
 
 run: build   ## Run the app
-	@./out/bin/credentials -vvv
+	@./out/bin/executable -vvv
 
 init: build
-	@./out/bin/credentials init -vvv
+	@./out/bin/executable init -vvv
+
+generate: build
+	@./out/bin/executable generate --clean --output out/dist -vvv
 
 test-build: ## Tests whether the code compiles
 	@go build -o /dev/null ./...
 
 build: imports out/bin ## Builds all binaries
 
-GO_BUILD = mkdir -pv "$(@)" && go build -ldflags="-w -s" -o "$(@)" ./...
+
 .PHONY: out/bin
 out/bin:
-	$(GO_BUILD)
+	mkdir -pv "$(@)" && go build -ldflags="-w -s" -o "$(@)/executable" .
 
 GOLANGCI_LINT = bin/golangci-lint-$(GOLANGCI_VERSION)
 $(GOLANGCI_LINT):

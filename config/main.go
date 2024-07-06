@@ -10,6 +10,12 @@ var config = new(Config)
 
 type Config struct {
 	Telemetry Telemetry `mapstructure:"telemetry"`
+
+	Vanity Vanity `mapstructure:",squash"`
+}
+
+func Get() Config {
+	return *config
 }
 
 func Bootstrap(ctx context.Context, opts ...Option) {

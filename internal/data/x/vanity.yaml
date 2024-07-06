@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://schemas.globalso.dev/go-vanity/config.schema.json
+domain: "go.globalso.dev"
+author: "Global Solutions L.A."
+packages:
+  - name: x/tools/vanity
+    provider: github
+    url: "https://github.com/globalso-labs/go-vanity-generator"
+    branch: main
+  - name: x/tools/logs
+    provider: github
+    url: "https://gitlab.com/globalso-labs/go-logger"
+    branch: main

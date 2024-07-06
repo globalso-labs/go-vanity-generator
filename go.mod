@@ -1,4 +1,4 @@
-module github.com/nickaguilarh/credentials
+module go.globalso.dev/x/tools/vanity
 
 go 1.22
 

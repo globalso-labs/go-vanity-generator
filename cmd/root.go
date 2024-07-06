@@ -4,8 +4,8 @@ import (
 	"os"
 
 	"github.com/gsols/go-logger"
-	"github.com/nickaguilarh/credentials/config"
 	"github.com/spf13/cobra"
+	"go.globalso.dev/x/tools/vanity/config"
 )
 
 // rootCmd represents the base command when called without any subcommands.
@@ -32,6 +32,7 @@ var rootCmd = &cobra.Command{
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	rootCmd.AddCommand(InitCommand())
+	rootCmd.AddCommand(GenerateCommand())
 
 	rootCmd.PersistentFlags().CountP("verbosity", "v", "verbosity level")
 

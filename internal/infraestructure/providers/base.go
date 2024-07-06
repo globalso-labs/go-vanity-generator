@@ -1,9 +1,9 @@
 /*
- * go-template
- * process.go
- * This file is part of go-template.
- * Copyright (c) 2023.
- * Last modified at Sun, 24 Dec 2023 21:21:03 -0500 by nick.
+ * go-vanity-generator
+ * base.go
+ * This file is part of go-vanity-generator.
+ * Copyright (c) 2024.
+ * Last modified at Mon, 24 Jul 2023 15:07:16 -0500 by nick.
  *
  * DISCLAIMER: This software is provided "as is" without warranty of any kind, either expressed or implied. The entire
  * risk as to the quality and performance of the software is with you. In no event will the author be liable for any
@@ -16,15 +16,22 @@
  * or otherwise exploit this software.
  */
 
-package ports
+package providers
 
-import (
-	"github.com/nickaguilarh/credentials/internal/core/domain"
-)
+import "fmt"
 
-type Process interface {
-	GetID() domain.ProcessID
+type baseProvider struct {
+	domain string
+	name   string
+	repo   string
+	branch string
+}
 
-	Start() error
-	Stop()
+// GetGoImportTag implements Provider.
+func (p *baseProvider) GetGoImportTag() string {
+	return fmt.Sprintf(
+		"%s/%s git %s",
+		p.domain, p.name,
+		p.repo,
+	)
 }

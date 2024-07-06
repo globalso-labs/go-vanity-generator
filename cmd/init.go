@@ -1,7 +1,9 @@
 package cmd
 
 import (
-	"github.com/nickaguilarh/credentials/internal/infraestructure/initialize"
+	"github.com/spf13/viper"
+	"go.globalso.dev/x/tools/vanity/internal/constants/cmd"
+	"go.globalso.dev/x/tools/vanity/internal/infraestructure/initialize"
 
 	"github.com/spf13/cobra"
 )
@@ -20,5 +22,8 @@ not overwrite existing files.`,
 }
 
 func InitCommand() *cobra.Command {
+	initCmd.Flags().BoolP("force", "f", false, "force the initialization")
+	_ = viper.BindPFlag(cmd.Force, initCmd.Flags().Lookup("force"))
+
 	return initCmd
 }
