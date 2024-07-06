@@ -18,10 +18,7 @@
 
 package constants
 
-// Providers' names
 const (
-	ProviderGitea     string = "gitea"
-	ProviderGitHub    string = "github"
-	ProviderGitLab    string = "gitlab"
-	ProviderSourcehut string = "sourcehut"
+	ProviderGitHub string = "github"
+	ProviderGitLab string = "gitlab"
 )

@@ -29,7 +29,7 @@ import (
 	"go.globalso.dev/x/tools/vanity/internal/data"
 )
 
-func (g *DefaultGenerator) writeErrorPage(ctx context.Context, params any) error {
+func (g *Gen) writeErrorPage(ctx context.Context, params any) error {
 	var errorPath = filepath.Join(g.output, "404.html")
 
 	tmpl, err := template.ParseFS(data.Templates, path.Join(data.TemplatesPath, data.ErrorPage))
@@ -49,7 +49,7 @@ func (g *DefaultGenerator) writeErrorPage(ctx context.Context, params any) error
 	return tmpl.Execute(file, params)
 }
 
-func (g *DefaultGenerator) writeIndexPage(ctx context.Context, params any) error {
+func (g *Gen) writeIndexPage(ctx context.Context, params any) error {
 	var indexPath = filepath.Join(g.output, "index.html")
 
 	tmpl, err := template.ParseFS(data.Templates, path.Join(data.TemplatesPath, data.IndexPage))

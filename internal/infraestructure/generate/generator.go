@@ -27,24 +27,21 @@ import (
 	"go.globalso.dev/x/tools/vanity/config"
 )
 
-var defaultGenerator = new(DefaultGenerator)
+var defaultGenerator = new(Gen)
 
-type DefaultGenerator struct {
+type Gen struct {
 	// Output is the output directory for the generated files.
 	output string
 
 	// Clean determines whether we clean the output directory before generation.
 	clean bool
-
-	// Data is the data to be used in the templates.
-	data map[string]interface{}
 }
 
-func (g *DefaultGenerator) SetClean(clean bool) {
+func (g *Gen) SetClean(clean bool) {
 	g.clean = clean
 }
 
-func (g *DefaultGenerator) SetOutput(output string) {
+func (g *Gen) SetOutput(output string) {
 	path, err := filepath.Abs(output)
 	if err != nil {
 		logger.Warn().Err(err).Msg("Failed to get the absolute path. Using the original path")
@@ -54,7 +51,7 @@ func (g *DefaultGenerator) SetOutput(output string) {
 	g.output = path
 }
 
-func (g *DefaultGenerator) Generate(ctx context.Context, vanity config.Vanity) error {
+func (g *Gen) Generate(ctx context.Context, vanity config.Vanity) error {
 	ctx = logger.Ctx(ctx).With().
 		Str("generator", "default").
 		Str("domain", vanity.Domain).
@@ -89,7 +86,7 @@ func (g *DefaultGenerator) Generate(ctx context.Context, vanity config.Vanity) e
 }
 
 // cleanPath removes all the files and directories in the output directory.
-func (g *DefaultGenerator) cleanPath(ctx context.Context) error {
+func (g *Gen) cleanPath(ctx context.Context) error {
 	logger.Ctx(ctx).Warn().Msgf("Cleaning the output directory %s.", g.output)
 
 	if err := os.RemoveAll(g.output); err != nil {
@@ -101,7 +98,7 @@ func (g *DefaultGenerator) cleanPath(ctx context.Context) error {
 }
 
 // assurePath creates the output directory if it does not exist.
-func (g *DefaultGenerator) assurePath(ctx context.Context) error {
+func (g *Gen) assurePath(ctx context.Context) error {
 	logger.Ctx(ctx).Trace().Msgf("Assuring the output directory %s.", g.output)
 
 	if err := os.MkdirAll(g.output, os.ModePerm); err != nil {
@@ -112,7 +109,7 @@ func (g *DefaultGenerator) assurePath(ctx context.Context) error {
 	return nil
 }
 
-func (g *DefaultGenerator) generateStaticFiles(ctx context.Context, params any) error {
+func (g *Gen) generateStaticFiles(ctx context.Context, params any) error {
 	if err := g.writeErrorPage(ctx, params); err != nil {
 		return err
 	}

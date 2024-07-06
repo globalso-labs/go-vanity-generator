@@ -24,7 +24,7 @@ const (
 )
 
 const (
-	// GeneratorClean determines whether we clean the output directory before generation
+	// GeneratorClean determines whether we clean the output directory before generation.
 	GeneratorClean = "clean"
 
 	// GeneratorOutput determines the output directory for the generated files.

@@ -25,14 +25,12 @@ import (
 	"go.globalso.dev/x/tools/vanity/internal/infraestructure/constants"
 )
 
-var all map[string]providerGenerator = map[string]providerGenerator{
-	constants.ProviderGitea:     newGiteaProvider,
-	constants.ProviderGitHub:    newGithubProvider,
-	constants.ProviderGitLab:    newGitlabProvider,
-	constants.ProviderSourcehut: newSourcehutProvider,
+var all = map[string]providerGenerator{
+	constants.ProviderGitHub: newGithubProvider,
+	constants.ProviderGitLab: newGitlabProvider,
 }
 
-func New(domain string, pkg config.Package) (Provider, error) {
+func New(domain string, pkg config.Package) (Provider, error) { //nolint: ireturn // Used as generator.
 	if generator, ok := all[pkg.Provider]; ok {
 		return generator(domain, pkg), nil
 	}

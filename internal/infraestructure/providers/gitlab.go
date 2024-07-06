@@ -39,9 +39,9 @@ func (p *gitlabProvider) GetGoSourceTag() string {
 	)
 }
 
-var _ Provider = &gitlabProvider{}
+var _ Provider = (*gitlabProvider)(nil)
 
-func newGitlabProvider(domain string, pkg config.Package) Provider {
+func newGitlabProvider(domain string, pkg config.Package) Provider { //nolint: ireturn // Used as generator.
 	return &gitlabProvider{
 		baseProvider: baseProvider{
 			domain: domain,
