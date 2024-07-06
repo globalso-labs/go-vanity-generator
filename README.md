@@ -30,30 +30,17 @@ Create a go-vanity.yml file in the root directory of your project with the
 following structure:
 
 ```yaml 
-# yaml-language-server: $schema=https://raw.githubusercontent.com/globalso-labs/go-vanity/main/config.schema.json
+# yaml-language-server: $schema=https://schemas.globalso.dev/go-vanity/config.schema.json
 domain: "go.globalso.dev"
 author: "Global Solutions L.A."
 packages:
-	- name: x/logger
-	  provider: github
-	  url: "https://github.com/globalso-labs/go-logger"
-	  branch: main
-	  subpackages:
-		  - logger
-		  - v2
-		  - v3
-	- name: tools
-	  provider: gitlab
-	  url: "https://gitlab.com/someuser/sometools"
-	  branch: devel
-	- name: awesome
-	  provider: gitea
-	  url: "https://try.gitea.io/someuser/some-awesome-package"
-	  branch: staging
-	  website: "https://somesite.com/my-awesome-package"
-	- name: others
-	  provider: sourcehut
-	  url: "https://git.sr.ht/~someuser/someotherpackage"
-	  branch: master
+  - name: x/tools/vanity
+    provider: github
+    url: "https://github.com/globalso-labs/go-vanity-generator"
+    branch: main
+  - name: x/tools/logs
+    provider: github
+    url: "https://github.com/globalso-labs/go-logger"
+    branch: main
 
 ```
