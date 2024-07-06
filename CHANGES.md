@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.0 (2024-07-06)
+
+
+### Features
+
+* initial release ([db4599e](https://github.com/globalso-labs/go-vanity-generator/commit/db4599e78f53c1c0e23f3fad47be46d5d8ee625f))
+
+
+### Bug Fixes
+
+* use domain name insted of provider name on provider ([e43195a](https://github.com/globalso-labs/go-vanity-generator/commit/e43195a77827459eaa15ad5d47dc8a515c139d83))
+
 ## 0.1.0 (2024-07-05)
 
 
