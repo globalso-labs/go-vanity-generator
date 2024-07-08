@@ -7,7 +7,7 @@ require (
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/viper v1.19.0
 	go.uber.org/automaxprocs v1.5.3
-	golang.org/x/tools v0.22.0
+	golang.org/x/tools v0.23.0
 )
 
 require (
@@ -32,6 +32,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/exp v0.0.0-20240613232115-7f521ea00fb8 // indirect
 	golang.org/x/mod v0.19.0 // indirect
+	golang.org/x/sync v0.7.0 // indirect
 	golang.org/x/sys v0.22.0 // indirect
 	golang.org/x/text v0.16.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
