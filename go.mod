@@ -6,7 +6,7 @@ require (
 	github.com/gsols/go-logger v1.6.0
 	github.com/spf13/cobra v1.8.1
 	github.com/spf13/viper v1.19.0
-	go.uber.org/automaxprocs v1.5.3
+	go.uber.org/automaxprocs v1.6.0
 	golang.org/x/tools v0.22.0
 )
 
