@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run Issue Bot
-        uses: derjuulsn/todo-issue@3c0b9bf8277455978dc4907155f430925e8607df #v1.1.4
+        uses: derjuulsn/todo-issue@c27fbdb0a33572f73dbdb683aa8b1382bea8289e #v2.0.0
         with:
           excludePattern: '^(vendor/)'
         env:
